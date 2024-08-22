@@ -29,12 +29,42 @@ from STUDENT_INFO
 create view STUDENT_DETAILS as select Name, Branch, spi from student_info
 select *from STUDENT_DETAILS
 --3. Create a view AcademicData having columns RNo, Name, Branch.
-create view VW_ADATA as select RNO, NAME, BRANCH from student_info
-select * from VW_ADATA
+create view AcademicData as select RNO, NAME, BRANCH from student_info
+select * from AcademicData
+
+drop view VW_ADATA
 --4. Create a view Student_ bklog having all columns but students whose bklog more than 2.
-create view VW_BCK as select name,
+create view Student_Bklog as select *
+from student_info
+where bklog>2
 --5. Create a view Student_Pattern having RNo, Name & Branch columns in which Name consists of four 
 --letters.
+
+create view student_Pattern as
+select RNo, Name, Branch
+from student_info
+where Name like'____'
+
+select * from student_Pattern
+
 --6. Insert a new record to AcademicData view. (107, Meet, ME)
+insert into AcademicData values(102,'Meet', 'ME')
+
 --7. Update the branch of Amit from CE to ME in Student_Details view.
+update STUDENT_DETAILS set Branch='ME'
+where name='Amit'
 --8. Delete a student whose roll number is 104 from AcademicData view.
+delete from AcademicData where Rno=104;
+
+--part B
+
+--1. Create a view that displays information of all students whose SPI is above 8.5
+create view Student_spi as
+select * from STUDENT_info where spi>8.5
+--2. Create a view that displays 0 backlog students.
+create view student_backlog as
+select * from student_info where Bklog=0
+--3. Create a view Computerview that displays CE branch data only.
+create view Computerview as
+select name
+from student_info where branch='CE'
